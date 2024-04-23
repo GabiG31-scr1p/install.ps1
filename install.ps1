@@ -169,9 +169,6 @@ if (-not (Test-Admin)) {
   $Host.UI.RawUI.Flushinputbuffer()
   )
 }
-else {
-  Write-Success
-}
 #endregion Checks
 
 #region Spicetify
