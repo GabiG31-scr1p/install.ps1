@@ -23,6 +23,18 @@ function Write-Unsuccess {
   }
 }
 
+function Test-Admin {
+  [CmdletBinding()]
+  param ()
+  begin {
+    Write-Host -Object "Checking if the script wasn't ran as Administrator..." -NoNewline
+  }
+  process {
+    $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    -not $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+  }
+}
+
 function Test-PowerShellVersion {
   [CmdletBinding()]
   param ()
@@ -151,7 +163,12 @@ if (-not (Test-PowerShellVersion)) {
 else {
   Write-Success
 }
-
+if (-not (Test-Admin)) {
+  Write-Unsuccess
+  Write-Warning -Message "The script was ran as Administrator which isn't recommended"
+  $Host.UI.RawUI.Flushinputbuffer()
+  )
+}
 else {
   Write-Success
 }
