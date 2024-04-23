@@ -167,7 +167,10 @@ if (-not (Test-Admin)) {
   Write-Unsuccess
   Write-Warning -Message "The script was ran as Administrator which isn't recommended"
   $Host.UI.RawUI.Flushinputbuffer()
-  )
+  Write-Success
+}
+else {
+  Write-Host -Object 'Spicetify edited by me goby_g31:'
 }
 #endregion Checks
 
@@ -181,21 +184,11 @@ Write-Host -Object 'to get started'
 
 #region Marketplace
 $Host.UI.RawUI.Flushinputbuffer()
-$choices = [System.Management.Automation.Host.ChoiceDescription[]] @(
-    (New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", "Install Spicetify Marketplace."),
-    (New-Object System.Management.Automation.Host.ChoiceDescription "&No", "Do not install Spicetify Marketplace.")
-)
-$choice = $Host.UI.PromptForChoice('', "`nDo you want to install Spicetify Marketplace?", $choices, 0)
-if ($choice -eq 1) {
-  Write-Host -Object 'spicetify Marketplace installation aborted' -ForegroundColor 'Yellow'
-}
-else {
   Write-Host -Object 'Starting the spicetify Marketplace installation script..'
   $Parameters = @{
     Uri             = 'https://raw.githubusercontent.com/spicetify/spicetify-marketplace/main/resources/install.ps1'
     UseBasicParsing = $true
   }
   Invoke-WebRequest @Parameters | Invoke-Expression
-}
 #endregion Marketplace
 #endregion Main
