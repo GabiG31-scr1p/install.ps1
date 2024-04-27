@@ -42,7 +42,6 @@ function Test-PowerShellVersion {
     $PSMinVersion = [version]'5.1'
   }
   process {
-  Write-Host -Object 'Spicetify edited by me goby_g31:'
     Write-Host -Object 'Checking if your PowerShell version is compatible...' -NoNewline
     $PSVersionTable.PSVersion -ge $PSMinVersion
   }
@@ -53,7 +52,6 @@ function Move-OldSpicetifyFolder {
   param ()
   process {
     if (Test-Path -Path $spicetifyOldFolderPath) {
-    Write-Host -Object 'Spicetify edited by me goby_g31:'
       Write-Host -Object 'Moving the old spicetify folder...' -NoNewline
       Copy-Item -Path "$spicetifyOldFolderPath\*" -Destination $spicetifyFolderPath -Recurse -Force
       Remove-Item -Path $spicetifyOldFolderPath -Recurse -Force
@@ -80,7 +78,6 @@ function Get-Spicetify {
         $targetVersion = $v
       }
       else {
-      Write-Host -Object 'Spicetify edited by me goby_g31:'
         Write-Warning -Message "You have spicefied an invalid spicetify version: $v `nThe version must be in the following format: 1.2.3"
         Pause
         exit
@@ -113,7 +110,6 @@ function Add-SpicetifyToPath {
   [CmdletBinding()]
   param ()
   begin {
-  Write-Host -Object 'Spicetify edited by me goby_g31:'
     Write-Host -Object 'Making spicetify available in the PATH...' -NoNewline
     $user = [EnvironmentVariableTarget]::User
     $path = [Environment]::GetEnvironmentVariable('PATH', $user)
@@ -135,7 +131,6 @@ function Install-Spicetify {
   [CmdletBinding()]
   param ()
   begin {
-  Write-Host -Object 'Spicetify edited by me goby_g31:'
     Write-Host -Object 'Installing spicetify...'
   }
   process {
@@ -175,14 +170,12 @@ if (-not (Test-Admin)) {
   Write-Success
 }
 else {
-  Write-Host -Object 'Spicetify edited by me goby_g31'
 }
 #endregion Checks
 
 #region Spicetify
 Move-OldSpicetifyFolder
 Install-Spicetify
-Write-Host -Object 'Spicetify edited by me goby_g31:'
 Write-Host -Object "`nRun" -NoNewline
 Write-Host -Object ' spicetify -h ' -NoNewline -ForegroundColor 'Cyan'
 Write-Host -Object 'to get started'
@@ -192,7 +185,6 @@ Write-Host -Object 'to get started'
 $Host.UI.RawUI.Flushinputbuffer()
   Write-Host -Object 'Starting the spicetify Marketplace installation script..'
   $Parameters = @{
-  Write-Host -Object 'Spicetify edited by me goby_g31:'
     Uri             = 'https://raw.githubusercontent.com/spicetify/spicetify-marketplace/main/resources/install.ps1'
     UseBasicParsing = $true
   }
